@@ -1,0 +1,8 @@
+# Ignore all .env files
+.env
+.env.*
+
+/node_modules
+Backend/node_modules
+Backend/.env/
+.env
