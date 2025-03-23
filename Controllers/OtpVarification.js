@@ -3,38 +3,44 @@ const UserModel = require('../Models/UserSchema');
 
 async function OtpVarification(req, res) {
     try {
-        const dataObject = req.body;
-        // console.log(dataObject);
+        const { email, otp } = req.body; 
 
-        // Get OTP from Redis
-        const otpRedis = await client.get(`otp:${dataObject.email}`);
+        const otpRedis = await client.get(`otp:${email}`);
 
-        // Validate OTP
-        if (!otpRedis || otpRedis !== dataObject.otp) {
+        if (!otpRedis) {
             return res.status(400).json({
-                message: "Invalid OTP or OTP expired",
+                message: "OTP expired or not found",
+                success: false
+            });
+        }
+        if (otpRedis !== otp) {
+            return res.status(400).json({
+                message: "Invalid OTP",
                 success: false
             });
         }
 
-        // Get user data from Redis
-        const userDataRedis = await client.get(`data:${dataObject.email}`);
-        console.log("user data redis", userDataRedis);
-
-        if (!userDataRedis && userDataRedis.email != dataObject.email) {
+        const userDataRedis = await client.get(`data:${email}`);
+        if (!userDataRedis) {
             return res.status(400).json({
                 message: "User data not found, please retry",
                 success: false
             });
         }
 
-        // Parse the retrieved Redis data
-        const parsedUserData = JSON.parse(userDataRedis)
-        // console.log("parssed data", parsedUserData);
+        const parsedUserData = JSON.parse(userDataRedis);
+        if (!parsedUserData || parsedUserData.email !== email) {
+            return res.status(400).json({
+                message: "Invalid user data, please retry",
+                success: false
+            });
+        }
 
-        // Save user data to database
         const dataToSave = new UserModel(parsedUserData);
         await dataToSave.save();
+
+        await client.del(`otp:${email}`);
+        await client.del(`data:${email}`);
 
         res.status(200).json({
             message: "Signup done successfully",

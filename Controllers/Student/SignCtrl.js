@@ -11,7 +11,6 @@ const SignupCtrl = async (req, res) => {
         const { username, email, password, role } = req.body;
         console.log(req.body);
 
-        // 🛑 Check if required fields are present
         if (!username || !email || !password || !role) {
             return res.status(400).json({
                 message: "Please fill all inputs",
@@ -19,7 +18,6 @@ const SignupCtrl = async (req, res) => {
             });
         }
 
-        // 🛑 Check if user already exists
         const isUserPresent = await UserModel.findOne({ email: email });
         if (isUserPresent) {
             return res.status(200).json({
@@ -28,29 +26,26 @@ const SignupCtrl = async (req, res) => {
             });
         }
 
-        // ✅ Generate OTP and save to Redis
         const otp = GeneratedOtp();
         await client.set(`otp:${email}`, otp, 'EX', 300);
         console.log("OTP saved to Redis:", otp);
 
-        // ✅ Encrypt password
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const hashpass = await bcrypt.hash(password, salt);
         console.log("Encrypted Password:", hashpass);
 
-        // ✅ Save user data temporarily in Redis (not DB yet)
+
         const dataToSave = { username, email, password: hashpass, role };
         await client.set(`data:${email}`, JSON.stringify(dataToSave), 'EX', 300);
 
         console.log("User data saved to Redis:", dataToSave);
 
-        // ✅ Send email in background (no need to wait)
         EmailSender(email, otp)
             .then(() => console.log(`OTP sent successfully to ${email}`))
             .catch(err => console.error(`Error sending OTP: ${err.message}`));
 
-        // ✅ Send response (only one)
+            
         return res.status(201).json({
             message: "User OTP sent to email successfully!",
             success: true
