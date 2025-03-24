@@ -4,7 +4,7 @@ const Adminstrator = require('../Models/AminstratorModel')
 async function AddQrData(req, res) {
     try {
         const { Entry_Qr, Exit_Qr, AdminEmail } = req.body; // Use req.body instead of req.params
-        console.log("Received Data:", req.body);
+        // console.log("Received Data:", req.body);
 
         if (!Entry_Qr || !Exit_Qr || !AdminEmail) {
             return res.status(400).json({
@@ -16,7 +16,7 @@ async function AddQrData(req, res) {
         // Check if admin exists
         const isAdmin = await Adminstrator.findOne({ email : AdminEmail });
         if (!isAdmin) {
-            console.log("not authorize")
+            // console.log("not authorize")
             return res.status(403).json({
                 message: "You are not authorized as an admin",
                 success: false

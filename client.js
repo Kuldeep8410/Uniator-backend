@@ -17,7 +17,7 @@ const { Redis } = require('ioredis');
 const dotenv = require('dotenv')
 dotenv.config();
 
-console.log(process.env.REDIS_URL)
+// console.log(process.env.REDIS_URL)
 
 const client = new Redis(process.env.REDIS_URL, {
     tls: {}

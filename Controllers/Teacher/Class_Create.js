@@ -6,7 +6,7 @@ async function ClassCreate(req, res) {
             startEntry,
             endEntry,
             Department } = req.body;
-        console.log("course data ", req.body)
+        // console.log("course data ", req.body)
 
 
         if (!courseCode || !courseName || !Teacher || !enddate || !startEntry || !endEntry || !Department) {

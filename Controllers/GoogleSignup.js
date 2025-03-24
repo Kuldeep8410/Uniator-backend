@@ -3,7 +3,7 @@ const GoogleSchema = require('../Models/UserGoogle');
  async function GoogleSignup (req,res){
     try {
         const frontendData = req.body;
-        console.log("Data from frontend google wala",frontendData);
+        // console.log("Data from frontend google wala",frontendData);
 
         //if user exist previously then 
         const isUserPresent = await GoogleSchema.findOne({ email: frontendData.email });

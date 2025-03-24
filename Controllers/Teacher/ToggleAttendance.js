@@ -3,9 +3,9 @@ const CourseModel = require("../../Models/ClassModel");
 
 async function ToggleAttendance (req, res){
     try {
-        console.log("function initiated")
+        // console.log("function initiated")
         const { id } = req.params; 
-        console.log("id jk", id)
+        // console.log("id jk", id)
         const { isActive } = req.body;
 
         const xyz = isActive

@@ -7,7 +7,7 @@ const UserModel = require('../../Models/UserSchema');
 async function StudentInCourse(req, res) {
     try {
         const { courseCode } = req.query;
-        console.log("Received data:", req.query);
+        // console.log("Received data:", req.query);
 
         if (!courseCode) {
             return res.status(400).json({

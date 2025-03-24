@@ -17,7 +17,7 @@ const AminLogin = async (req, res) => {
         }
 
         const isUserExists = await AdmnModel.findOne({ AdminEmail: email })
-        console.log(isUserExists);
+        // console.log(isUserExists);
 
         if (!isUserExists) {
             return res.status(400).json({
@@ -25,7 +25,7 @@ const AminLogin = async (req, res) => {
                 success: false
             })
         }
-        console.log("user dep",isUserExists.Department)
+        // console.log("user dep",isUserExists.Department)
 
         const passwordVerify = await bcrypt.compare(password, isUserExists.password)
         if (!passwordVerify) {

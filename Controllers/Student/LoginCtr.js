@@ -19,7 +19,7 @@ const LoginCtrl = async (req, res) => {
         }
 
         const isUserExists = await userModel.findOne({ email: email })
-        console.log(isUserExists);
+        // console.log(isUserExists);
 
         if (!isUserExists) {
             return res.status(400).json({

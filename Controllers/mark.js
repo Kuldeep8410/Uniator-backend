@@ -28,5 +28,5 @@ async function markAttendance(courseCode, date, studentId, status = 'Present') {
     }
 
     await attendanceRecord.save();
-    console.log(`Attendance marked for student ${studentId} in course ${courseCode}.`);
+    // console.log(`Attendance marked for student ${studentId} in course ${courseCode}.`);
 }

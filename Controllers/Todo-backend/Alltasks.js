@@ -4,7 +4,7 @@ const Alltasks = async (req, res) => {
     try {
         const { email } = req.params;
         const dataFetched = await UserModel.findOne({ email: email });
-        console.log(dataFetched)
+        // console.log(dataFetched)
 
         if (!dataFetched) {
             return res.status(404).send({ message: "User not found" });

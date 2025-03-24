@@ -4,7 +4,7 @@ const UserModel = require('../../Models/UserSchema');
 async function DeleteStudent(req, res) {
     try {
         const { AdminEmail, userEmail } = req.query;
-        console.log("delete data", req.query);
+        // console.log("delete data", req.query);
 
 
         if (!AdminEmail || !userEmail) {

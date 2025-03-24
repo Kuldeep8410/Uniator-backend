@@ -4,7 +4,7 @@ const AdminModel = require('../../Models/AdminModel');
 async function SendAllClass(req, res) {
     try {
         const { email, role } = req.query; 
-        console.log("Data received:", req.query);
+        // console.log("Data received:", req.query);
 
         if (!email || !role) {
             return res.status(400).json({

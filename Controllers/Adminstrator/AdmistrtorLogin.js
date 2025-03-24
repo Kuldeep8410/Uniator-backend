@@ -8,7 +8,7 @@ dotenv.config();
 async function AdministratorLogin(req, res) {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     if (!email || !password) {
       return res.status(400).json({
@@ -19,7 +19,7 @@ async function AdministratorLogin(req, res) {
 
     // 🔹 Check if the user exists
     const isAdministrator = await AdministratorModel.findOne({ email: email });
-    console.log(isAdministrator);
+    // console.log(isAdministrator);
 
     if (!isAdministrator) {
       return res.status(401).json({
@@ -28,10 +28,10 @@ async function AdministratorLogin(req, res) {
       });
     }
 
-    console.log(isAdministrator.role);
+    // console.log(isAdministrator.role);
 
     const correctPass = await bcrypt.compare(password, isAdministrator.password);
-    console.log(correctPass);
+    // console.log(correctPass);
 
     if (!correctPass) {
       return res.status(401).json({
@@ -41,7 +41,7 @@ async function AdministratorLogin(req, res) {
     }
 
     if (isAdministrator.role === "Administrator") {
-      console.log("Password is correct");
+      // console.log("Password is correct");
 
       // 🔹 Generate JWT
       const adminJwt = jwt.sign(

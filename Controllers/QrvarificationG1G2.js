@@ -6,7 +6,7 @@ const Adminstrator = require("../Models/AminstratorModel")
 async function QrvarificationG1G2(req, res) {
   try {
     const { qrvalue, email } = req.query;
-    console.log("QR details:", req.query);
+    // console.log("QR details:", req.query);
 
     if (!qrvalue || !email) {
       return res.status(400).json({
@@ -22,7 +22,7 @@ async function QrvarificationG1G2(req, res) {
 
 
     if (!adminData) {
-      console.log("value check hua ")
+      // console.log("value check hua ")
       return res.status(400).json({
         message: "error in fetching Db Qr",
         success: false,
@@ -32,7 +32,7 @@ async function QrvarificationG1G2(req, res) {
     //checking qr is match or not
     const isValidQr = adminData.some(admin => admin.Entry_Qr === qrvalue || admin.Exit_Qr === "Exit420");
     if (isValidQr) {
-      console.log("wron qr hi")
+      // console.log("wron qr hi")
       return res.status(400).json({
         message: "Wrong QR code",
         success: false,

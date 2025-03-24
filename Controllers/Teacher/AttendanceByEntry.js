@@ -6,7 +6,7 @@ async function AttendOfStudent(req, res) {
     try {
 //got the query request
         const { courseCode, studentEmail } = req.query;
-        console.log("teacher",req.query)
+        // console.log("teacher",req.query)
 
         if (!courseCode || !studentEmail) {
             return res.status(400).json({

@@ -14,13 +14,13 @@ async function DeletedCourse(req, res) {
         }
 
         courseId = courseId.trim();
-        console.log("Processed courseId:", courseId);
+        // console.log("Processed courseId:", courseId);
 
         // const email = "gk3@gmail.com"; 
 
         const isCourseAvailable = await CourseModel.findOne({ courseCode: courseId });
 
-        console.log("Course details:", isCourseAvailable);
+        // console.log("Course details:", isCourseAvailable);
 
         if (!isCourseAvailable) {
             return res.status(400).json({

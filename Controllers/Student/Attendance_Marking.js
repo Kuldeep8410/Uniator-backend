@@ -4,7 +4,7 @@ const UserModel = require('../../Models/UserSchema')
 async function Attendance_marking(req, res) {
     try {
         const { classId, email, status } = req.body;
-        console.log("Attendance data ", req.body);
+        // console.log("Attendance data ", req.body);
 
         if (!classId || !email || !status) {
             return res.status(400).json({
@@ -14,7 +14,7 @@ async function Attendance_marking(req, res) {
         }
 
         const studentExist = await UserModel.findOne({ email: email })
-        console.log("student data ", studentExist._id)
+        // console.log("student data ", studentExist._id)
         if (!studentExist) {
             return res.status(400).json({
                 message: "Student Not Exists",
@@ -87,13 +87,13 @@ async function Attendance_marking(req, res) {
             const idcourse = classId;
             const stdid = userId;
 
-            console.log("Fetching data for:", idcourse, stdid);
+            // console.log("Fetching data for:", idcourse, stdid);
 
             totalClass = await getTotalClasses(idcourse);
             presentsClass = await getClassesAttendedByStudent(idcourse, stdid);
 
-            console.log("Total Classes:", totalClass);  
-            console.log("Presented in Class:", presentsClass);
+            // console.log("Total Classes:", totalClass);  
+            // console.log("Presented in Class:", presentsClass);
 
             return res.status(200).json({
                 message: "Your attendance has been marked successfully",

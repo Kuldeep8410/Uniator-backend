@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const LoginValid = (req, res, next) => {
     const token = req.cookies.Myjwt;
-    console.log("here",token)
+    // console.log("here",token)
     if (!token) {
       return res.status(401).json({ message: "Unauthorized login" });
     }

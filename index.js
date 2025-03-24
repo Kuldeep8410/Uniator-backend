@@ -27,17 +27,17 @@ app.use('/mern-revision/v1/get', getRoute);
 app.use('/mern-revision/v1/put', putrouter);
 
 app.get('/hello', (req, res) => {
-  console.log("Health check: Server is running!");
+  // console.log("Health check: Server is running!");
   res.send("<h1>Server is live! 🚀</h1>");
 });
 
 const URL = process.env.MONGO_URL;
-console.log("Connecting to MongoDB...");
+// console.log("Connecting to MongoDB...");
 
 DB_connect(URL)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      // console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => {

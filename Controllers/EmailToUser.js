@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 async function EmailSendToUser(user_email, otp) {
   try {
     dotenv.config();
-    console.log("user email is: ", user_email);
+    // console.log("user email is: ", user_email);
 
     let transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST, // Example: "smtp.gmail.com"
@@ -16,10 +16,10 @@ async function EmailSendToUser(user_email, otp) {
         pass: process.env.MAIL_PASS,
       },
     });
-    console.log("Email sent successfully to:", user_email);
-    console.log("SMTP User:", process.env.MAIL_USER);
-    console.log("SMTP Password Length:", process.env.MAIL_PASS ? process.env.MAIL_PASS.length : 0);
-    console.log("Sending email to:", user_email);
+    // console.log("Email sent successfully to:", user_email);
+    // console.log("SMTP User:", process.env.MAIL_USER);
+    // console.log("SMTP Password Length:", process.env.MAIL_PASS ? process.env.MAIL_PASS.length : 0);
+    // console.log("Sending email to:", user_email);
 
     let info = await transporter.sendMail({
       from: process.env.MAIL_USER,
@@ -93,8 +93,8 @@ async function EmailSendToUser(user_email, otp) {
     `,
     });
 
-    console.log("Email sent successfully to:", user_email);
-    console.log("Email Message ID:", info.messageId);
+    // console.log("Email sent successfully to:", user_email);
+    // console.log("Email Message ID:", info.messageId);
 
     if (info.messageId) {
       return true;

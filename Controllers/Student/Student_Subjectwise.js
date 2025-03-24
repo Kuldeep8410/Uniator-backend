@@ -4,7 +4,7 @@ const AttendanceModel = require("../../Models/Attendance");
 
 async function Student_Subjectwise(req, res) {
     const { courseId, email } = req.query;
-    console.log("Data received:", req.query);
+    // console.log("Data received:", req.query);
 
     if (!courseId || !email) {
         return res.status(400).json({
@@ -36,7 +36,7 @@ async function Student_Subjectwise(req, res) {
             "attendanceRecords.student": userId,
             "attendanceRecords.status": "Present",
         }).select("date course"); // Selecting only date & course fields
-        console.log("all bhai here ",attendanceRecords)
+        // console.log("all bhai here ",attendanceRecords)
 
         if (!attendanceRecords.length) {
             return res.status(200).json({

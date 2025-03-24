@@ -4,7 +4,7 @@ const userG_model = require('../Models/UserGoogle')
 function Qr_varifi(req, res){
     try {
         const qrData =req.body;
-        console.log("here is qr data",qrData)
+        // console.log("here is qr data",qrData)
 
         const isUserPresent = usermodel.findOne({email : qrData.email})
         const isUserGoogle = userG_model.findOne({email: qrData.email})
