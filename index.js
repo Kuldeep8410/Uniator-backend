@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: "https://frontend-uniator.vercel.app",
+    origin: ["http://localhost:5173", "https://frontend-uniator.vercel.app"],
     credentials: true, // Allow cookies & auth headers
   })
 );
