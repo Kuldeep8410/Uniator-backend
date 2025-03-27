@@ -11,7 +11,7 @@ const AminLogin = async (req, res) => {
 
         if (!username || !email || !password) {
             return res.status(400).json({
-                message: "Amd conf inputs",
+                message: "teacher conf inputs",
                 success: false
             })
         }
@@ -30,7 +30,7 @@ const AminLogin = async (req, res) => {
         const passwordVerify = await bcrypt.compare(password, isUserExists.password)
         if (!passwordVerify) {
             return res.status(400).json({
-                message: "Adm Wrong password",
+                message: "teacher Wrong password",
                 success: false,
             })
         }

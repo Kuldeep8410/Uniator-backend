@@ -20,7 +20,7 @@ async function AdmSignup(req, res) {
         const userPresnt = await AdminModel.findOne({ AdminEmail: email });
         if (userPresnt) {
             return res.status(200).json({
-                message: "Admin Already exits",
+                message: "Teacher Already exits",
                 success: false
             })
         }
@@ -56,7 +56,7 @@ async function AdmSignup(req, res) {
     } catch (error) {
         console.log("error in Amd sign ",error)
         return res.status(500).json({
-            message : "failure in Adminsign ctrl",
+            message : "failure in Teacher sign ctrl",
             success : false
         })
 
