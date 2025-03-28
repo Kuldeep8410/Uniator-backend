@@ -1,113 +1,67 @@
-
-const express = require('express');
-const bcrypt = require('bcrypt');
-const AdminModel = require('../../Models/AdminModel');  //adim == teacher
-const GeneratedOtp = require('../OtpGenerator');
-const EmailSender = require('../EmailToUser');
-
-const client = require('../../client');
-
-
 const AdmSignup = async (req, res) => {
     try {
-        // app.use(express.json());
-        const { email, name, password, role, FuckltyOf
-        } = req.body;
+        const { email, name, password, role, FuckltyOf } = req.body;
 
-        //checking proper request coming or not
-       console.log("data",req.body)
+        console.log("data", req.body);
 
-        if (!email || !password || !name || !role || !FuckltyOf
-        ) {
+        if (!email || !password || !name || !role || !FuckltyOf) {
             return res.status(400).json({
-                message: "all fields are required",
+                message: "All fields are required",
                 success: false
-            })
+            });
         }
 
-        const isUserPresent = await AdminModel.findOne({AdminEmail : email})
-        if(isUserPresent){
+        const isUserPresent = await AdminModel.findOne({ AdminEmail: email });
+        if (isUserPresent) {
             return res.status(200).json({
-                message : "User already exists please login",
-                success : false,
-            })
+                message: "User already exists, please login",
+                success: false,
+            });
         }
-
-
-        
-        //send opt function to user
 
         const otp = GeneratedOtp();
-        // console.log("generated otp", otp);
-        const saveOtp_to_redis =await client.set(`otp:${email}`, otp); //ise save krna hai in redis db
+        await client.set(`otp:${email}`, otp);
 
-        console.log("otp saved to redis", saveOtp_to_redis);
+        // Send OTP email first
+        const responseEmail = await EmailSender(email, otp);
+        console.log("Email sending response:", responseEmail);
 
-        //email send to user 
-        
-
-
-        //wait for user side otp
-        // encrypt the password
-        //salt generation
-        const saltRounds = 10;
-
-        try {
-            const salt = await bcrypt.genSalt(saltRounds);
-            const hashpass = await bcrypt.hash(password, salt);
-
-            console.log("Encrypted Password:", hashpass);
-
-            //database model document
-            const dataToSave = {
-                AdminName: name,
-                AdminEmail: email,
-                password: hashpass,
-                role: role,
-                Department: FuckltyOf,
-            };
-            await client.set(`data:${email}`, JSON.stringify(dataToSave))
-            res.status(201).json({ message: "User Otp Send to mail successfully!", user: dataToSave });
-
-        } catch (error) {
-            res.status(500).json({ message: "Error encrypting password", success: false, error });
-        }
-
-        const responseEmail = await EmailSender(email,otp);
-        
-        if(responseEmail){
-            return res.status(200).json({
-                message : `OTP send Succesfully to ${email}`,
-                success : true
-            })
-        }
-        else if(!responseEmail) {
+        if (!responseEmail) {
             return res.status(500).json({
-                message : "error pleas try again",
-                success : false,
-            })
+                message: "Error sending email, please try again",
+                success: false,
+            });
         }
 
+        // Encrypt password
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashpass = await bcrypt.hash(password, salt);
 
+        console.log("Encrypted Password:", hashpass);
 
-        // const objectToDb = {
-        //     username : username,
-        //     email : email,
-        //     password : hashpass,
-        //     role : role
-        // }
-        // console.log("hiiii ", hashpass)
+        // Save data in Redis
+        const dataToSave = {
+            AdminName: name,
+            AdminEmail: email,
+            password: hashpass,
+            role: role,
+            Department: FuckltyOf,
+        };
+        await client.set(`data:${email}`, JSON.stringify(dataToSave));
 
-        // Note :- you can  not write the code for saving userdata to database because if encrypt fail which lead to bad writing in database
+        // Send response only once
+        return res.status(201).json({
+            message: `OTP sent successfully to ${email}`,
+            success: true,
+            user: dataToSave
+        });
 
-
-        //Outside of the try-catch block, hash is undefined because bcrypt.hash() is asynchronous. If you don't use await, the execution moves forward before the hashing completes.
-
-
-       
     } catch (error) {
-        res.status(500).json({ message: "Error signing up user", error: error.message });
+        res.status(500).json({
+            message: "Error signing up user",
+            success: false,
+            error: error.message
+        });
     }
 };
-
-module.exports = AdmSignup;
