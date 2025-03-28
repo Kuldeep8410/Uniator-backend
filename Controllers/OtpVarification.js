@@ -71,7 +71,8 @@ async function OtpVerification(req, res) {
 
         res.status(200).json({
             message: "Signup done successfully",
-            success: true
+            success: true,
+            role : parsedUserData.role
         });
     } catch (error) {
         console.error("Error in OTP verification:", error);
