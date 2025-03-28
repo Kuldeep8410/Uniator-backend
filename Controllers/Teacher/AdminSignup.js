@@ -74,6 +74,7 @@ const AdmSignup = async (req, res) => {
         }
 
         const responseEmail = await EmailSender(email,otp);
+        
         if(responseEmail){
             return res.status(200).json({
                 message : `OTP send Succesfully to ${email}`,
