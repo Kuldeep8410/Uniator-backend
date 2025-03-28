@@ -4,7 +4,7 @@ const PostModel = require('../../Models/PostsSchema');
 async function RetriveAllPosts(req, res) {
     try {
         const { email } = req.query;
-        console.log("User fetching all posts:", req.query);
+        // console.log("User fetching all posts:", req.query);
 
         if (!email) {
             return res.status(400).json({

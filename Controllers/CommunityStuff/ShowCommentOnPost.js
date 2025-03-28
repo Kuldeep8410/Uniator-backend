@@ -11,7 +11,7 @@ const UserModel = require('../../Models/UserSchema');
 async function ShowCommentOnPost(req, res) {
     try {
         const { postId } = req.query;
-        console.log("For comment showing, ID received:", postId);
+        // console.log("For comment showing, ID received:", postId);
 
         if (!postId) {
             return res.status(400).json({

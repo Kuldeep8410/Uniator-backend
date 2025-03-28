@@ -14,7 +14,7 @@ const PostModel = require('../../Models/PostsSchema');
 async function MakeCommentToPost(req, res) {
     try {
         const { email, commentBody, postId } = req.body;
-        console.log("Received comment request:", req.body);
+        // console.log("Received comment request:", req.body);
 
         if (!email || !commentBody || !postId) {
             return res.status(400).json({

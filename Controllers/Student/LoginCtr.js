@@ -8,10 +8,10 @@ const userModel = require('../../Models/UserSchema');
 const LoginCtrl = async (req, res) => {
     try {
         dotenv.config();
-        const { username, email, password } = req.body;
+        const { email, password } = req.body;
         console.log("login info", username, email, password);
 
-        if (!username || !email || !password) {
+        if (!email || !password) {
             return res.status(400).json({
                 message: "bro conf inputs",
                 success: false

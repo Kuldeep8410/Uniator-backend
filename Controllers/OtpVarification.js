@@ -5,7 +5,7 @@ const AdminModel = require('../Models/AdminModel');
 async function OtpVerification(req, res) {
     try {
         const dataObject = req.body;
-        console.log("otp verification", req.body);
+        // console.log("otp verification", req.body);
 
         // Check if the request body contains necessary data
         if (!dataObject || !dataObject.email || !dataObject.otp) {
@@ -17,7 +17,7 @@ async function OtpVerification(req, res) {
 
         // Get OTP from Redis
         const otpRedis = await client.get(`otp:${dataObject.email}`);
-        console.log("redis get operation", otpRedis);
+        // console.log("redis get operation", otpRedis);
 
         // Validate OTP
         if (!otpRedis || otpRedis !== dataObject.otp) {
@@ -29,7 +29,7 @@ async function OtpVerification(req, res) {
 
         // Get user data from Redis
         const userDataRedis = await client.get(`data:${dataObject.email}`);
-        console.log("redis user data", userDataRedis);
+        // console.log("redis user data", userDataRedis);
 
         // Check if user data is found in Redis
         if (!userDataRedis) {

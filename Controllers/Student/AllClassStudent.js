@@ -5,7 +5,7 @@ const SelectStudentDep = require('./SelectDepartment');
 async function AllClasstudent(req, res) {
     try {
         const { email, role } = req.query; 
-        console.log("Data received:", req.query);
+        // console.log("Data received:", req.query);
 
         if (!email || !role) {
             return res.status(400).json({
@@ -15,7 +15,7 @@ async function AllClasstudent(req, res) {
         }
 
         const StudentAvailable = await UserModel.findOne({ email: email });
-        console.log("rollll ",StudentAvailable)
+        // console.log("rollll ",StudentAvailable)
 
         if (!StudentAvailable || StudentAvailable.role !== role) {
             return res.status(403).json({

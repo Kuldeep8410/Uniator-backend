@@ -7,9 +7,9 @@ const AdmnModel = require('../../Models/AdminModel');
 const AminLogin = async (req, res) => {
     try {
         dotenv.config();
-        const { username, email, password } = req.body;
+        const {email, password } = req.body;
 
-        if (!username || !email || !password) {
+        if (!email || !password) {
             return res.status(400).json({
                 message: "teacher conf inputs",
                 success: false

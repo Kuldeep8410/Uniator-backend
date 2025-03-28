@@ -9,7 +9,7 @@ const AdmSignup = async (req, res) => {
     try {
         const { email, name, password, role, FuckltyOf } = req.body;
 
-        console.log("Received Data:", req.body);
+        // console.log("Received Data:", req.body);
 
         // Validate input fields
         if (!email || !password || !name || !role || !FuckltyOf) {
@@ -32,7 +32,7 @@ const AdmSignup = async (req, res) => {
         const otp = GeneratedOtp();
         await client.set(`otp:${email}`, otp);
 
-        console.log("OTP saved to Redis:", otp);
+        // console.log("OTP saved to Redis:", otp);
 
         // Send OTP email to user
         const responseEmail = await EmailSender(email, otp);
@@ -50,7 +50,7 @@ const AdmSignup = async (req, res) => {
         const salt = await bcrypt.genSalt(saltRounds);
         const hashpass = await bcrypt.hash(password, salt);
 
-        console.log("Encrypted Password:", hashpass);
+        // console.log("Encrypted Password:", hashpass);
 
         // Save user data to Redis
         const dataToSave = {
