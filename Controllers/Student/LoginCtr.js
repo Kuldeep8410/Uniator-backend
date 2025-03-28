@@ -9,7 +9,7 @@ const LoginCtrl = async (req, res) => {
     try {
         dotenv.config();
         const { email, password } = req.body;
-        console.log("login info", username, email, password);
+        // console.log("login info", email, password);
 
         if (!email || !password) {
             return res.status(400).json({
