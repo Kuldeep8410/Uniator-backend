@@ -13,8 +13,8 @@ const CourseSchema = new Schema({
     startEntry: { type: String, required: true },
     endEntry: { type: String, required: true },
     Department: { type: String, required: true },
-    longitude: { type: Number, required: true },
-    latitude: { type: Number, required: true },
+    longitude: { type: Number },
+    latitude: { type: Number},
     radius: { type: Number }
 });
 
