@@ -8,11 +8,14 @@ const CourseSchema = new Schema({
     Teacher: { type: String, required: true },
     isActive: { type: Boolean, required: true },
     createdAt: { type: Date, default: Date.now },  // ✅ Fix: Uses default for dynamic timestamp
-    
+
     enddate: { type: String, required: true },
     startEntry: { type: String, required: true },
     endEntry: { type: String, required: true },
     Department: { type: String, required: true },
+    longitude: { type: Number, required: true },
+    latitude: { type: Number, required: true },
+    radius: { type: Number }
 });
 
 

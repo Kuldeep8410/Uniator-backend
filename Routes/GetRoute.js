@@ -7,7 +7,9 @@ const All_Class_Std = require('../Controllers/Student/Student_Subjectwise')
 const QrvarificationG1G2 = require('../Controllers/QrvarificationG1G2')
 const AllEntries = require('../Controllers/AllEntries')
 
+//student imports
 const SingleClassDetail = require('../Controllers/Student/SingleClassDetails')
+const VarifyLocation = require('../Controllers/Student/VarifyLocation')
 
 
 
@@ -47,5 +49,6 @@ getrouter.get('/comments-of-post',ShowCommentOnPost);
 
 //student 
 getrouter.get('/get-single-class-details',SingleClassDetail);
+getrouter.get('/get-varify-location', VarifyLocation);
 
 module.exports = getrouter;
