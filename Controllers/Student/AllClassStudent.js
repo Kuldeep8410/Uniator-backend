@@ -29,7 +29,7 @@ async function AllClasstudent(req, res) {
         const extractEmail = email.substring(2,2+3);
         const StudentDep = SelectStudentDep(extractEmail);
 
-        console.log("dep",StudentDep,extractEmail,StudentDepAndYear)
+        // console.log("dep",StudentDep,extractEmail,StudentDepAndYear)
 
 
         // Fetch all class data
@@ -39,7 +39,7 @@ async function AllClasstudent(req, res) {
             endEntry: { $gte: StudentDepAndYear }
         }).select("courseCode courseName Teacher createdAt isActive startEntry endEntry");
 
-        console.log(AllClassData)
+        // console.log(AllClassData)
 
         return res.status(200).json({
             message: "Fetched all classes successfully",
