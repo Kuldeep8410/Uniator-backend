@@ -4,7 +4,7 @@ async function VarifyLocation(req, res) {
     try {
         // GET request
         const { longitude, latitude, classId } = req.query;
-        console.log(req.query)
+        // console.log(req.query)
 
         if (!longitude || !latitude || !classId) {
             return res.status(400).json({
@@ -44,7 +44,7 @@ async function VarifyLocation(req, res) {
             return R * c; // Distance in kilometers
         }
 
-        const distanceCalculated = calculateDistance(latitude1, longitude1, latitude2, longitude2);
+        const distanceCalculated = calculateDistance(latitude1, longitude1, latitude2, longitude2) * 1000;
 
         if (distanceCalculated < radius1) {
             return res.status(200).json({
