@@ -11,7 +11,7 @@ async function FetchAllPosts(req, res) {
 
         let query = {};
         if (cursor) {
-            query = { createAt: { $lt: new Date(cursor) } };
+            query = { createdAt: { $lt: new Date(cursor) } };
         }
 
         const posts = await PostModel.find(query)
