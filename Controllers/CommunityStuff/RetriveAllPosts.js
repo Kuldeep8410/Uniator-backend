@@ -1,14 +1,16 @@
+//this will retrive all post without any pagignation
+
 const UserModel = require('../../Models/UserSchema');
 const PostModel = require('../../Models/PostsSchema');
 
 async function RetriveAllPosts(req, res) {
     try {
         const { email } = req.query;
-        // console.log("User fetching all posts:", req.query);
+        console.log("User fetching all posts:", req.query);
 
         if (!email) {
             return res.status(400).json({
-                message: "Ha Ji, Kaha? Kuhh Data toh Bhejiye!",
+                message: "Ha Ji, Kaha? Kuchh Data toh Bhejiye!",
                 success: false
             });
         }

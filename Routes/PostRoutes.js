@@ -22,6 +22,10 @@ const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')
 
 //COMMUNITY IMPORT HERE
 const MakeApost = require('../Controllers/CommunityStuff/MakePost')
+
+
+//image upload 
+const ImageUploader = require('../Controllers/CommunityStuff/ImageUploader');
  
 
 
@@ -55,6 +59,7 @@ router.post('/adminstrator-login',AdminstratorLogin)
 
 //COMMUNITY STUFF HERE
 router.post('/make-a-post',MakeApost);
+router.post('/upload-the-image',ImageUploader);
 
 
 

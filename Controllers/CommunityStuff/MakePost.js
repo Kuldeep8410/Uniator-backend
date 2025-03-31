@@ -13,9 +13,10 @@ const PostModel = require('../../Models/PostsSchema')
 
 async function MakePost(req, res) {
     try {
-        const { email, PostBody, ImageUrl } = req.body;
+        const { email,url, title, body } = req.body;
+        console.log(req.body)
 
-        if (!email || !PostBody) {
+        if (!email || !body || !title) {
             return res.status(400).json({
                 message: "Data Sahi Se Nahi Aa rha bhai",
                 success: false
@@ -40,8 +41,9 @@ async function MakePost(req, res) {
         //adding user post to PostModel
         const SaveToPostModel = new PostModel({
             userId: UserId,
-            postBody: PostBody,
-            postImg : ImageUrl || null,
+            title : title,
+            postBody: body,
+            postImg : url || null,
             createdAt: new Date().setHours(0, 0, 0, 0),
             email: email
         });

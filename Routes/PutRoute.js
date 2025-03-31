@@ -20,7 +20,7 @@ putrouter.put('/set-location-radius', SetAllowedLocation)
 
 
 //COMMUNITY PUT ROUTES
-putrouter.put('/make-like-on-post',Like);
+putrouter.put('/make-like-on-post/',Like);
 putrouter.put('/make-dislike-on-post',Dislike);
 putrouter.put('/make-a-comment',CommnetOnPost);
 
