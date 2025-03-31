@@ -2,7 +2,7 @@ const PostModel = require("../../Models/PostsSchema");
 
 async function FetchAllPosts(req, res) {
     try {
-        let { limit = 10, cursor } = req.query;
+        let { limit = 20, cursor } = req.query;
         limit = parseInt(limit); // Convert limit to a valid number
 
         console.log("Fetching posts with:", req.query);
