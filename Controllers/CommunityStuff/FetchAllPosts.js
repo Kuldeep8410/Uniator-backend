@@ -3,7 +3,7 @@ const PostModel = require("../../Models/PostsSchema");
 async function FetchAllPosts(req, res) {
     try {
         let { limit = 10, cursor } = req.query;
-        limit = parseInt(limit) || 10; // Convert limit to a valid number, default to 10
+        limit = parseInt(limit); // Convert limit to number
 
         console.log("Fetching posts with:", req.query);
 
@@ -17,14 +17,14 @@ async function FetchAllPosts(req, res) {
             }
         }
 
-        // Fetch posts sorted by `createdAt` (newest first)
+        // Fetch posts sorted by `createdAt` (latest first)
         const posts = await PostModel.find(query)
-            .sort({ createdAt: -1 }) // ✅ Fetch the newest posts first
+            .sort({ createdAt: -1 }) // ✅ Fetch latest posts first
             .limit(limit)
             .lean(); // Convert Mongoose documents to plain JSON for better performance
 
-        // Generate `nextCursor` only if there are more posts to load
-        const nextCursor = posts.length === limit ? posts[posts.length - 1].createdAt.toISOString() : null;
+        // Generate `nextCursor` if there are more posts
+        const nextCursor = posts.length > 0 ? posts[posts.length - 1].createdAt.toISOString() : null;
 
         return res.status(200).json({ success: true, posts, nextCursor });
     } catch (error) {
