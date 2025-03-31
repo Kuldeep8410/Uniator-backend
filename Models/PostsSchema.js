@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema(
     {
         userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
         email : {type : String,required:true},
+        title: { type: String, trim: true },
         postBody: { type: String, trim: true },
         postImg: { type: String, trim: true },
 
