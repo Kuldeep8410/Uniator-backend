@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 
+const FileUpload = require('express-fileupload');
+const clodinaryConnect = require('./Configs/CloudinaryConfig')
 const DB_connect = require('./Configs/DatabaseConfig');
 const route = require('./Routes/PostRoutes');
 const getRoute = require('./Routes/GetRoute');
@@ -11,6 +13,9 @@ const putrouter = require('./Routes/PutRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3000; 
+
+app.use(FileUpload({useTempFiles : true, tempFileDir : "./temp/"}));
+
 
 app.use(
   cors({
@@ -44,3 +49,5 @@ DB_connect(URL)
     console.error("MongoDB Connection Error:", err);
     process.exit(1);
   });
+
+clodinaryConnect();
