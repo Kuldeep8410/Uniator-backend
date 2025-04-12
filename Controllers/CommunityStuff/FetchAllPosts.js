@@ -19,7 +19,7 @@ async function FetchAllPosts(req, res) {
 
         // Fetch posts sorted by `createdAt` (latest first)
         const posts = await PostModel.find(query)
-            .sort({ createdAt: -1 }) // ✅ Fetch latest posts first
+            .sort({ createdAt: -1 }) // Fetch latest posts first
             .limit(limit)
             .lean(); // Convert Mongoose documents to plain JSON for better performance
 

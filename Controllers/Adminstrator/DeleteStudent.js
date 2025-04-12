@@ -9,7 +9,7 @@ async function DeleteStudent(req, res) {
 
         if (!AdminEmail || !userEmail) {
             return res.status(400).json({
-                message: "kya bhai data nahi aya laat marke nikalne ka",
+                message: "InSuffiecient Data",
                 success: false
             });
         }
@@ -19,7 +19,7 @@ async function DeleteStudent(req, res) {
         const isUserPresent = await UserModel.findOne({ email: userEmail });
         if (!isUserPresent) {
             return res.status(400).json({
-                message: "Sorry Malik User exist Na Kre LA",
+                message: "Sorry! User Not Exists",
                 success: false
             });
         }
@@ -29,7 +29,7 @@ async function DeleteStudent(req, res) {
         const isAdministrator = await AdminstratorModel.findOne({ email: AdminEmail });
         if (!isAdministrator) {
             return res.status(401).json({
-                message: "Admin Fargii Hai, Ya email Galat Hai",
+                message: "Bad Request, unauthorize",
                 success: false
             });
         }
@@ -39,7 +39,7 @@ async function DeleteStudent(req, res) {
         const deletionResponse = await UserModel.findByIdAndDelete(isUserPresent._id);
         if (!deletionResponse) {
             return res.status(400).json({
-                message: "Acchi Koshish thi malik try again, Data genuine hai",
+                message: "Error While deleting user",
                 success: false
             });
         }
@@ -47,7 +47,7 @@ async function DeleteStudent(req, res) {
 
 
         return res.status(200).json({
-            message: "Chaliye malik apki mehnat Saphal hui Student ko laat marke nikal diye",
+            message: "User Has Been Deleted",
             success: true
         });
 
@@ -56,7 +56,7 @@ async function DeleteStudent(req, res) {
     } catch (error) {
         console.log("error in admin deleting user", error);
         return res.status(500).json({
-            message: "malik ye server ki Ma** chud gayi",
+            message: "Server Side Error",
             success: false
         });
     }

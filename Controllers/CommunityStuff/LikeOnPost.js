@@ -60,7 +60,7 @@ async function MakeLike(req, res) {
     } catch (error) {
         console.error("Error in MakeLike function:", error);
         return res.status(500).json({
-            message: "Iserver ke L  lag Gaye.",
+            message: "Server Side Error",
             success: false
         });
     }

@@ -64,7 +64,7 @@ async function RetriveAllPosts(req, res) {
     } catch (error) {
         console.error("Server Side Error:", error);
         return res.status(500).json({
-            message: "Server Phat Gaya Saayad!",
+            message: "Server side error",
             success: false
         });
     }

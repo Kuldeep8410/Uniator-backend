@@ -54,7 +54,7 @@ async function MakeDislike(req, res) {
     } catch (error) {
         console.error("Error in Dislike function:", error);
         return res.status(500).json({
-            message: "server ke L  lag Gaye.",
+            message: "Server Side Error!!",
             success: false
         });
     }

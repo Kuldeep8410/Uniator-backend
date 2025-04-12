@@ -60,7 +60,7 @@ async function MakePost(req, res) {
     } catch (error) {
         console.log("error occur in Make Post Ctrl", error);
         return res.status(500).json({
-            message : "Server Phat Gaya Ismein Meri Koi galti Nahi Hai Ji",
+            message : "Server Error",
             success : false
         })
 

@@ -48,14 +48,14 @@ async function VarifyLocation(req, res) {
 
         if (distanceCalculated < radius1) {
             return res.status(200).json({
-                message: "Ok Darling! You Can Mark Attendance ✅",
+                message: "You Can Mark Attendance ✅",
                 success: true,
                 range : radius1,
                 currentDistance : distanceCalculated
             });
         } else {
             return res.status(200).json({
-                message: "Yeh Duri Kaisi Darling? 🤔",
+                message: "Out of range 🤔",
                 success: false,
                 range : radius1,
                 currentDistance : distanceCalculated
