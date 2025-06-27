@@ -15,6 +15,7 @@ const ClassCreate = require('../Controllers/Teacher/Class_Create')
 const Attendance_marking = require('../Controllers/Student/Attendance_Marking')
 
 const DeleteCourse = require('../Controllers/Teacher/DeleteRequest')
+const Notification = require('../Controllers/Teacher/AddNotification')
 
 
 const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')
