@@ -15,7 +15,13 @@ const CourseSchema = new Schema({
     Department: { type: String, required: true },
     longitude: { type: Number },
     latitude: { type: Number},
-    radius: { type: Number }
+    radius: { type: Number },
+    Notification: [
+        {
+            message: String,
+            createdAt: { type: Date, default: Date.now, expires: '7d' }
+        }
+    ]
 });
 
 
