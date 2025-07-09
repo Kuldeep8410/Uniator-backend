@@ -66,7 +66,7 @@ const LoginCtrl = async (req, res) => {
             .cookie("Myjwt", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
                 secure: true,   // Send only over HTTPS (enable in production)
-                sameSite: "Strict", // Prevent CSRF attacks
+                sameSite: "None", // Prevent CSRF attacks
                 maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expires in 7 days
             })
             .json({
