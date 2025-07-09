@@ -20,7 +20,7 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://frontend-uniator.vercel.app"],
+    origin: ["https://frontend-uniator.vercel.app"],
     credentials: true, // Allow cookies & auth headers
   })
 );
