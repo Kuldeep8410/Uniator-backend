@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(FileUpload({useTempFiles : true, tempFileDir : "./temp/"}));
 
+app.set("trust proxy", 1);
 
 app.use(
   cors({
