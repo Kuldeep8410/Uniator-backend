@@ -48,6 +48,8 @@ const LoginCtrl = async (req, res) => {
             process.env.JWT_SECRETE,
             { expiresIn: '24h' }
         )
+        const isProduction = true;
+        const age = 7 * 24 * 60 * 60 * 1000;
 
         //Method 01 to sending data to frontend 
 
@@ -65,9 +67,17 @@ const LoginCtrl = async (req, res) => {
             .status(200)
             .cookie("Myjwt", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
-                secure: true,   // Send only over HTTPS (enable in production)
-                sameSite: "None", // Prevent CSRF attacks
-                maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expires in 7 days
+                secure: isProduction,
+                sameSite: isProduction ? "none" : "lax",
+                path: "/",
+                partitioned: isProduction,
+                maxAge: age,
+                // domain: isProduction ? '.vercel.app' : ".localhost",
+                // partitioned: isProduction,
+                // maxAge: age,
+                // secure: true,   // Send only over HTTPS (enable in production)
+                // sameSite: "None", // Prevent CSRF attacks
+                // maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expires in 7 days
             })
             .json({
                 message: "Login successfully",
