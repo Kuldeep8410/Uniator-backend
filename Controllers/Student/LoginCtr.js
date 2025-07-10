@@ -72,7 +72,7 @@ const LoginCtrl = async (req, res) => {
                 path: "/",
                 partitioned: isProduction,
                 maxAge: age,
-                domain: isProduction ? 'uniator-backend.onrender.com' : undefined,
+                domain: isProduction ? 'onrender.com' : undefined,
                 // domain: isProduction ? '.vercel.app' : ".localhost",
                 // partitioned: isProduction,
                 // maxAge: age,
