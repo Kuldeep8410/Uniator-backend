@@ -68,10 +68,10 @@ const LoginCtrl = async (req, res) => {
             .cookie("Myjwt", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
                 secure: isProduction,
-                sameSite: isProduction ? "none" : "lax",
+                sameSite: isProduction ? "None" : "Lax",
                 path: "/",
                 partitioned: isProduction,
-                // maxAge: age,
+                maxAge: age,
                 domain: isProduction ? 'uniator-backend.onrender.com' : undefined,
                 // domain: isProduction ? '.vercel.app' : ".localhost",
                 // partitioned: isProduction,
