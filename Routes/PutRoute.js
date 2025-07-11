@@ -5,6 +5,7 @@ const putrouter = express.Router();
 const ToggleAttendance = require('../Controllers/Teacher/ToggleAttendance')
 const AddQrData = require('../Controllers/AddQrByAdmin')
 const SetAllowedLocation = require('../Controllers/Teacher/SetAllowedLocation')
+const updateUserProfile = require('../Controllers/Student/Update-profile')
 
 
 
@@ -17,6 +18,7 @@ const CommnetOnPost = require('../Controllers/CommunityStuff/CommnetOnPost')
 putrouter.put('/toggleattendance/:id', ToggleAttendance);
 putrouter.put('/addordetails', AddQrData);
 putrouter.put('/set-location-radius', SetAllowedLocation)
+putrouter.put('/update-user-profile', updateUserProfile);
 
 
 //COMMUNITY PUT ROUTES
