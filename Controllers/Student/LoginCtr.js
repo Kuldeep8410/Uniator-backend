@@ -9,7 +9,7 @@ const LoginCtrl = async (req, res) => {
     try {
         dotenv.config();
         const { email, password } = req.body;
-        // console.log("login info", email, password);
+        console.log("login info", email, password);
 
         if (!email || !password) {
             return res.status(400).json({
@@ -19,18 +19,18 @@ const LoginCtrl = async (req, res) => {
         }
 
         const isUserExists = await userModel.findOne({ email: email })
-        // console.log(isUserExists);
+        console.log(isUserExists);
 
         if (!isUserExists) {
             return res.status(400).json({
-                message: "bro please make sign up",
+                message: "please make sign up",
                 success: false
             })
         }
 
         //defining student department
         const StudentYearAndDep = email.substring(0, 8)
-        
+
 
 
 
@@ -48,8 +48,6 @@ const LoginCtrl = async (req, res) => {
             process.env.JWT_SECRETE,
             { expiresIn: '24h' }
         )
-        const isProduction = true;
-        const age = 7 * 24 * 60 * 60 * 1000;
 
         //Method 01 to sending data to frontend 
 
@@ -67,18 +65,9 @@ const LoginCtrl = async (req, res) => {
             .status(200)
             .cookie("Myjwt", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
-                secure: isProduction,
-                sameSite: isProduction ? "None" : "Lax",
-                path: "/",
-                partitioned: isProduction,
-                maxAge: age,
-                domain: isProduction ? 'onrender.com' : undefined,
-                // domain: isProduction ? '.vercel.app' : ".localhost",
-                // partitioned: isProduction,
-                // maxAge: age,
-                // secure: true,   // Send only over HTTPS (enable in production)
-                // sameSite: "None", // Prevent CSRF attacks
-                // maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expires in 7 days
+                secure: true,   // Send only over HTTPS (enable in production)
+                sameSite: "Strict", // Prevent CSRF attacks
+                maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expires in 7 days
             })
             .json({
                 message: "Login successfully",
@@ -86,7 +75,13 @@ const LoginCtrl = async (req, res) => {
                 role: isUserExists.role,
                 name: isUserExists.username,
                 email: isUserExists.email,
-                StudentDepAndYear : StudentYearAndDep,
+                description: isUserExists.description,
+                location: isUserExists.location,
+                github: isUserExists.github,
+                linkedin: isUserExists.linkedin, // removed duplicate 'linked'
+                skills: isUserExists.skills,
+                stats: isUserExists.stats,
+                StudentDepAndYear: StudentYearAndDep,
             });
 
 
