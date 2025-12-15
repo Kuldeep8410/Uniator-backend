@@ -20,7 +20,7 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: ["https://frontend-uniator.vercel.app"],
+    origin: ["https://frontend-uniator.vercel.app", "frontend-uniator-git-main-kuldeep420s-projects.vercel.app"],
     credentials: true, // Allow cookies & auth headers
   })
 );
